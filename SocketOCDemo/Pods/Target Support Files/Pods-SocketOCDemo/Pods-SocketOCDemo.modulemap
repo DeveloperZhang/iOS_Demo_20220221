@@ -1,0 +1,6 @@
+framework module Pods_SocketOCDemo {
+  umbrella header "Pods-SocketOCDemo-umbrella.h"
+
+  export *
+  module * { export * }
+}

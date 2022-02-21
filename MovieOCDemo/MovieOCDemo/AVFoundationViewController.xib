@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AVFoundationViewController">
+            <connections>
+                <outlet property="slider" destination="fXY-t2-MxA" id="MGD-4V-ren"/>
+                <outlet property="toolbar" destination="ubC-Lz-Mr9" id="fir-Hi-FaK"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ubC-Lz-Mr9">
+                    <rect key="frame" x="0.0" y="847" width="414" height="49"/>
+                    <items>
+                        <barButtonItem title="Item" image="play" catalog="system" id="yqO-C8-JFk">
+                            <connections>
+                                <action selector="playAction:" destination="-1" id="GaG-Dv-iIg"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" id="HGo-pz-91k">
+                            <slider key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" id="fXY-t2-MxA">
+                                <rect key="frame" x="44.5" y="10" width="233" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="seekAction:" destination="-1" eventType="valueChanged" id="pSD-wL-Cme"/>
+                                </connections>
+                            </slider>
+                        </barButtonItem>
+                    </items>
+                </toolbar>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="ubC-Lz-Mr9" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="4Yw-Wv-pZh"/>
+                <constraint firstAttribute="bottom" secondItem="ubC-Lz-Mr9" secondAttribute="bottom" id="GpR-Pz-fqX"/>
+                <constraint firstItem="ubC-Lz-Mr9" firstAttribute="trailing" secondItem="Q5M-cg-NOt" secondAttribute="trailing" id="OHU-wO-E46"/>
+            </constraints>
+            <point key="canvasLocation" x="131.8840579710145" y="105.80357142857143"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="play" catalog="system" width="120" height="128"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
