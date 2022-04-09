@@ -1,0 +1,21 @@
+PODS:
+  - AAInfographics (4.0.0)
+
+DEPENDENCIES:
+  - AAInfographics (from `https://gitee.com/iOS_wanglu/AAChartKit-Swift`)
+
+EXTERNAL SOURCES:
+  AAInfographics:
+    :git: https://gitee.com/iOS_wanglu/AAChartKit-Swift
+
+CHECKOUT OPTIONS:
+  AAInfographics:
+    :commit: 5f290e1261240c98039cd790739be0d247fae854
+    :git: https://gitee.com/iOS_wanglu/AAChartKit-Swift
+
+SPEC CHECKSUMS:
+  AAInfographics: bbeed03caece4ee3b5e557d734967394e9bcdb11
+
+PODFILE CHECKSUM: 3c26776b441c8f8a6826f83201375fb721b0f730
+
+COCOAPODS: 1.11.1

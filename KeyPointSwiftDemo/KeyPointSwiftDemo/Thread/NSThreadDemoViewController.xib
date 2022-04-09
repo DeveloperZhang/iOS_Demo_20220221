@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NSThreadDemoViewController" customModule="KeyPointSwiftDemo" customModuleProvider="target">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="轻量级，使用简单" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O1e-VV-ypQ">
+                    <rect key="frame" x="137.5" y="94" width="139" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dj7-Ie-hBR">
+                    <rect key="frame" x="185" y="196" width="44" height="31"/>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="plain" title="init"/>
+                    <connections>
+                        <action selector="threadCreateMethod1Action:" destination="-1" eventType="touchUpInside" id="45C-AO-ctn"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Kk-eh-3CV">
+                    <rect key="frame" x="109" y="257" width="196" height="31"/>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="plain" title="detachNewThreadSelector"/>
+                    <connections>
+                        <action selector="threadCreateMethod2Action:" destination="-1" eventType="touchUpInside" id="uY7-h7-wgs"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f5F-6R-1D7">
+                    <rect key="frame" x="97.5" y="318" width="219" height="31"/>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="plain" title="performSelectorInBackground"/>
+                    <connections>
+                        <action selector="threadCreateMethod3Action:" destination="-1" eventType="touchUpInside" id="jJi-fy-Z9I"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="创建方式" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hHh-Bu-FtU">
+                    <rect key="frame" x="172" y="145" width="70" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="f5F-6R-1D7" firstAttribute="centerX" secondItem="5Kk-eh-3CV" secondAttribute="centerX" id="FWm-FS-Aqd"/>
+                <constraint firstItem="hHh-Bu-FtU" firstAttribute="top" secondItem="O1e-VV-ypQ" secondAttribute="bottom" constant="30" id="OeY-ms-UoI"/>
+                <constraint firstItem="O1e-VV-ypQ" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="50" id="RfZ-zT-HE1"/>
+                <constraint firstItem="5Kk-eh-3CV" firstAttribute="top" secondItem="Dj7-Ie-hBR" secondAttribute="bottom" constant="30" id="T2o-5D-QVG"/>
+                <constraint firstItem="Dj7-Ie-hBR" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="X0K-Uc-TmQ"/>
+                <constraint firstItem="hHh-Bu-FtU" firstAttribute="centerX" secondItem="O1e-VV-ypQ" secondAttribute="centerX" id="YBj-1I-779"/>
+                <constraint firstItem="f5F-6R-1D7" firstAttribute="top" secondItem="5Kk-eh-3CV" secondAttribute="bottom" constant="30" id="eMP-Kl-cyp"/>
+                <constraint firstItem="O1e-VV-ypQ" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="o10-6c-vcl"/>
+                <constraint firstItem="5Kk-eh-3CV" firstAttribute="centerX" secondItem="Dj7-Ie-hBR" secondAttribute="centerX" id="pyD-pW-sB3"/>
+                <constraint firstItem="Dj7-Ie-hBR" firstAttribute="top" secondItem="hHh-Bu-FtU" secondAttribute="bottom" constant="30" id="sPB-f8-UVe"/>
+            </constraints>
+            <point key="canvasLocation" x="132" y="126"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
