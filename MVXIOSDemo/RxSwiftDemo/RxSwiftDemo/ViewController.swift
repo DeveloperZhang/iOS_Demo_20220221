@@ -18,6 +18,35 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("RxSwift Demo")
+        test3()
+    }
+
+    func test3() {
+        // 创建序列（后续讲解序列的创建）
+        let observable = Observable.of("A", "B", "C")
+        // 序列的订阅
+        observable.subscribe(onNext: { element in
+            print(element)
+        }, onError: { error in
+            print(error)
+        }, onCompleted: {
+            print("completed")
+        }, onDisposed: {
+            print("disposed")
+        }).disposed(by: disposeBag)
+    }
+    
+    func test2() {
+        // 创建序列（后续讲解序列的创建）
+        let observable = Observable.of("A", "B", "C")
+        // 序列的订阅
+        observable.subscribe { event in
+            print(event)
+        }.disposed(by: disposeBag)
+    }
+    
+    func test1() {
         self.flag = BehaviorRelay(value: false)
         
         flag?.subscribe(onNext: { flag in
@@ -30,9 +59,7 @@ class ViewController: UIViewController {
             print("button clicked")
             return Observable.empty()
         }
-        
     }
-
 
 }
 
