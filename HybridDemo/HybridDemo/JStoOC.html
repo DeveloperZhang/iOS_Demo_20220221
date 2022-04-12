@@ -63,6 +63,22 @@
             function clickBtn() {
                 alert("1111");
             }
+            var parameter = xxx;
+            function yourFuncName(parameter) {
+                alert(parameter);
+            }
+            //! 登录
+            function login() {
+              var token = "js_tokenString";
+              loginSucceed(token);
+            }
+
+            //! 登录成功
+            function loginSucceed(token) {
+              var action = "loginSucceed";
+              var dic = {'action':action,'token':token}
+              window.webkit.messageHandlers.jsToOc.postMessage(dic);
+            }
         </script>
     </head>
     <body>
@@ -71,6 +87,7 @@
         <a href="javascript:void(0);" onclick="changeColor(0)">测试JS</a>
         <div id='buttons'></div>
         <div id='log'></div>
-        <button onclick="clickBtn()">ClickMe</button>
+        <button onclick="clickBtn()">ClickMe</button><br/>
+        <button onclick = "login()" style = "font-size: 18px;">登录</button>
     </body>
 </html>

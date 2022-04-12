@@ -8,11 +8,17 @@
 #import "ViewController.h"
 #import <WebKit/WebKit.h>
 #import "WebViewJavascriptBridge.h"
+#import <JavaScriptCore/JavaScriptCore.h>
 
-@interface ViewController ()<WKUIDelegate, WKNavigationDelegate>
+@interface ViewController ()<WKUIDelegate, WKNavigationDelegate, WKScriptMessageHandler> {
+    WKWebViewConfiguration *config;
+}
+
 @property (weak, nonatomic) IBOutlet WKWebView *myWebView;
 @property (weak, nonatomic) IBOutlet UIProgressView *progressView;
 @property (nonatomic, strong) WebViewJavascriptBridge *bridge;
+@property (nonatomic, strong) JSContext *jsContext;
+@property (strong, nonatomic) IBOutlet WKWebView *webView1;
 
 @end
 
@@ -23,10 +29,13 @@
     NSLog(@"Hello Hybrid");
     NSString *path = [[NSBundle mainBundle] pathForResource:@"JStoOC.html" ofType:nil];
     NSString *htmlString = [[NSString alloc]initWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
+    [self configWebView];
+    self.myWebView = self.webView1;
     self.myWebView.UIDelegate = self;
     self.myWebView.navigationDelegate = self;
     [self.myWebView loadHTMLString:htmlString baseURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]]];
     
+    /**
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)),dispatch_get_main_queue(),^{
         //OC调用JS  changeColor()是JS方法名，completionHandler是异步回调block
         NSString *jsString = [NSString stringWithFormat:@"changeColor(%d)", 1];
@@ -34,6 +43,10 @@
          NSLog(@"改变HTML的背景色");
         }];
     });
+
+    */
+    
+    /**
     // 启用 WebViewJavascriptBridge Log
     [WebViewJavascriptBridge enableLogging];
     self.bridge = [WebViewJavascriptBridge bridgeForWebView:self.myWebView];
@@ -46,10 +59,15 @@
         NSLog(@"testObjcCallback called: %@", data);
         responseCallback(@"Response from testObjcCallback");
     }];
+    */
+    
+    [self testJSCore1];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    //webViewAppShare这个需保持跟服务器端的一致，服务器端通过这个name发消息，客户端这边回调接收消息，从而做相关的处理
+    [self.webView1.configuration.userContentController addScriptMessageHandler:self name:@"jsToOc"];
     //添加监测网页加载进度的观察者
      [self.myWebView addObserver:self
                     forKeyPath:@"estimatedProgress"
@@ -62,7 +80,9 @@
                        context:nil];
 }
 
+
 - (void)viewDidDisappear:(BOOL)animated {
+    [self.webView1.configuration.userContentController removeScriptMessageHandlerForName:@"jsToOc"];
     //移除观察者
     [self.myWebView removeObserver:self
                   forKeyPath:NSStringFromSelector(@selector(estimatedProgress))];
@@ -71,6 +91,49 @@
     [super viewDidDisappear:animated];
 }
 
+
+
+
+- (void)configWebView {
+    config = [[WKWebViewConfiguration alloc]init];
+    //注册js方法
+    config.userContentController = [[WKUserContentController alloc]init];
+    self.webView1 = [[WKWebView alloc] initWithFrame:self.myWebView.frame configuration:config];
+    [self.view addSubview:self.webView1];
+}
+
+//js交互方法
+- (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message
+{
+    if ([message.name caseInsensitiveCompare:@"jsToOc"] == NSOrderedSame) {
+        NSLog(@"message.name is %@,message.body is %@",message.name,message.body);
+    }
+}
+
+//不支持WkWebView,需要在UIWebView的webViewDidFinishLoad:方法中调用功能
+- (void)testJSCore2 {
+    // 设置javaScriptContext上下文
+    self.jsContext = [self.myWebView valueForKeyPath:@"documentView.webView.mainFrame.javaScriptContext"];
+    //将bsg对象指向自身 //网页端设置点击方法：bsg.call()，call()方法由bsg对象调用，此处将自身设置为bsg对象，用来调用本地方法而非网页方法
+    self.jsContext[@"ios"] = self;
+    self.jsContext.exceptionHandler = ^(JSContext *context, JSValue *exceptionValue) {
+        context.exception = exceptionValue;
+        NSLog(@"异常信息：%@", exceptionValue);
+    };
+}
+
+- (void)testJSCore1 {
+    //创建虚拟机
+    JSVirtualMachine *vm = [[JSVirtualMachine alloc] init];
+    //创建上下文
+    JSContext *context = [[JSContext alloc] initWithVirtualMachine:vm];
+    //执行JavaScript代码并获取返回值
+    JSValue *value = [context evaluateScript:@"1+2*3"];
+    //转换成OC数据并打印
+    NSLog(@"value = %d", [value toInt32]);
+    JSValue *value2 = [context evaluateScript:@"function hi(){ return 'hi' }; hi()"];
+    NSLog(@"value = %@", [value2 toString]);
+}
 
 //kvo 监听进度 必须实现此方法
 -(void)observeValueForKeyPath:(NSString *)keyPath

@@ -18,7 +18,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self asyncSerial];
+    [self syncSerial];
 
 }
 
@@ -107,6 +107,15 @@
         NSLog(@"%@-4",[NSThread currentThread]);
     });
     NSLog(@"%@-5",[NSThread currentThread]);
+}
+
+- (void)syncSerial {
+    dispatch_queue_t serial = dispatch_queue_create("SERIAL", DISPATCH_QUEUE_SERIAL);
+    NSLog(@"%@-1",[NSThread currentThread]);
+    dispatch_sync(serial, ^{
+        NSLog(@"%@-2",[NSThread currentThread]);
+    });
+    NSLog(@"%@-3",[NSThread currentThread]);
 }
 
 @end

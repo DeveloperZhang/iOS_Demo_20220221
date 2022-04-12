@@ -58,7 +58,6 @@
 				99AAC884B3CCC5DE7A69B7B4 /* Pods-HybridDemo.debug.xcconfig */,
 				EF57C261F5D0910D757854F8 /* Pods-HybridDemo.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
